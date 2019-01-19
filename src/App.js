@@ -10,9 +10,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentScore = 0;
-      isWon: false;
-      highScore = 0;
+      currentScore: 0,
+      isWon: false,
+      highScore: 0,
       images: [
         {
           src: './public/assets/images/GTR.jpg',
@@ -102,7 +102,7 @@ class App extends Component {
         }
       }
     })
-    newImages = this.shuffleImages(newImage);
+    newImages = this.shuffleImages(newImages);
     this.setState({ images: newImages });
   }
 
@@ -115,7 +115,7 @@ class App extends Component {
       this.setState({
         images: newImages,
         TopScore: TopScore,
-        currentScore: 0;
+        currentScore: 0
       })
     }
     else {
@@ -136,12 +136,53 @@ class App extends Component {
     return newImages;
   }
 
-  shuffleImages (images) => {
-    let newImage = [];
-    for(let i = images.length; i > 0; i--) {
-      let random = Math.floor(Math.random()*i);
-      newImages
+  shuffleImages = (images) => {
+    let newImages = [];
+    for (let i = images.length; i > 0; i--) {
+      let random = Math.floor(Math.random() * i);
+      newImages.push(images.splice(random, 1)[0]);
+    }
+    return newImages;
+  }
+
+  winClickHandler = () => {
+    this.reset();
+    this.setState({ isWon: false })
+  }
+
+  displayImages = () => {
+    if (!this.state.isWon) {
+      return (
+        <Board images={this.state.images} onClick={this.imageClickHandler} />
+      )
+    }
+    else {
+      return (
+        <div className="row">
+          <h1>Congratulations! You Won!</h1>
+          <button className="btn btn-medium" onClick={this.winClickHandler}>Play Again?</button>
+        </div>
+      )
     }
   }
 
-  export default App;
+  render() {
+    return (
+      <div className="App">
+        <HeaderBar />
+        <Banner />
+        <div className="container">
+          <div className="row">
+            <p>Current Score: {this.state.currentScore}</p>
+            <p>High Score: {this.state.highScore}</p>
+          </div>
+          <div className="row" value={this.state.isWon}>
+            {this.displayImages()}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
