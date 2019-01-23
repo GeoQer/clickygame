@@ -5,7 +5,6 @@ function HeaderBar(props) {
         <nav>
             <div className="nav-wrapper black">
                 <a href="/" className="brand-logo left">Clicky Game!</a>
-                <div className="brand-logo right">Score:  | Top Score: </div>
             </div>
         </nav>
     )
