@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Banner from './components/Banner';
 import HeaderBar from './components/HeaderBar';
-
-let Score
-
-let TopScore
+import BackDrop from './components/BackDrop';
 
 class App extends Component {
   constructor(props) {
@@ -15,62 +12,62 @@ class App extends Component {
       highScore: 0,
       images: [
         {
-          src: './public/assets/images/GTR.jpg',
+          src: './assets/images/GTR.jpg',
           isClicked: false,
           name: 'GTR'
         },
         {
-          src: './public/assets/images/ZR1.jpg',
+          src: './assets/images/ZR1.jpg',
           isClicked: false,
           name: 'ZR1'
         },
         {
-          src: './public/assets/images/GT.jpg',
+          src: './assets/images/GT.jpg',
           isClicked: false,
           name: 'GT'
         },
         {
-          src: './public/assets/images/Chiron.jpg',
+          src: './assets/images/Chiron.jpg',
           isClicked: false,
           name: 'Chiron'
         },
         {
-          src: './public/assets/images/F50.jpg',
+          src: './assets/images/F50.jpg',
           isClicked: false,
           name: 'F50'
         },
         {
-          src: './public/assets/images/S7.jpg',
+          src: './assets/images/S7.jpg',
           isClicked: false,
           name: 'S7'
         },
         {
-          src: './public/assets/images/GT350.jpg',
+          src: './assets/images/GT350.jpg',
           isClicked: false,
           name: 'GT350'
         },
         {
-          src: './public/assets/images/One-77.jpg',
+          src: './assets/images/One-77.jpg',
           isClicked: false,
           name: 'One-77'
         },
         {
-          src: './public/assets/images/Cobra.jpg',
+          src: './assets/images/Cobra.jpg',
           isClicked: false,
           name: 'Cobra'
         },
         {
-          src: './public/assets/images/Huracan.jpg',
+          src: './assets/images/Huracan.jpg',
           isClicked: false,
           name: 'Huracan'
         },
         {
-          src: './public/assets/images/720S.jpg',
+          src: './assets/images/720S.jpg',
           isClicked: false,
           name: '720S'
         },
         {
-          src: './public/assets/images/Huayra.jpg',
+          src: './assets/images/Huayra.jpg',
           isClicked: false,
           name: 'Huayra'
         }
@@ -78,7 +75,7 @@ class App extends Component {
     };
   }
 
-  imageClick = (event) => {
+  imageClickHandler = (event) => {
     let newImages = this.state.images;
     newImages.forEach(image => {
       if (image.name === event.target.alt) {
@@ -110,11 +107,11 @@ class App extends Component {
     let newImages = this.resetisClicked(this.state.images);
     this.setState({ images: newImages });
 
-    if (this.state.currentScore > this.state.TopScore) {
-      let TopScore = this.state.currentScore;
+    if (this.state.currentScore > this.state.highScore) {
+      let highScore = this.state.currentScore;
       this.setState({
         images: newImages,
-        TopScore: TopScore,
+        highScore: highScore,
         currentScore: 0
       })
     }
@@ -153,7 +150,7 @@ class App extends Component {
   displayImages = () => {
     if (!this.state.isWon) {
       return (
-        <Board images={this.state.images} onClick={this.imageClickHandler} />
+        <BackDrop images={this.state.images} onClick={this.imageClickHandler} />
       )
     }
     else {
