@@ -62,7 +62,7 @@ class App extends Component {
           name: 'Huracan'
         },
         {
-          src: './assets/images/720S.jpg',
+          src: './assets/images/720s.jpg',
           isClicked: false,
           name: '720S'
         },
